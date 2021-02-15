@@ -11,9 +11,15 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [filtered, setFiltered] = useState([]);
+//RUN ONCE..esto se ejecutara solo una vez al iniciar
+  useEffect(()=>{
+     getLocalTodos();
+  }, [])
 
+  //use Efect se ejecuta siempre
   useEffect (()=>{
     filtrar();
+    saveLocalTodos();
   }, [todos, status])
   
   const filtrar = ()=>{
@@ -30,6 +36,24 @@ function App() {
         setFiltered(todos);
 
         break;
+    }
+  }
+
+  //save to local
+  const saveLocalTodos = () => {
+    //guarda todo lo nuevo seteando
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }
+  
+  const getLocalTodos = ()=> {
+    if (localStorage.getItem("todos") === null){
+      localStorage.setItem("todos", JSON.stringify([]))
+    }else{
+      //si hay algo en localStorage.. lo pedimos y guardamos en variable
+      let todoLocal = JSON.parse(localStorage.getItem("todos"))
+      //console.log("ACA ESTA TODOOOOOS",todoLocal)
+      //lo seteamos al estado
+      setTodos(todoLocal)
     }
   }
 
