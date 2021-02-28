@@ -2,17 +2,24 @@ import React from "react";
 
 const Form = ({ setInputText, todos, setTodos, inputText, setStatus }) => {
 
-    const InputTextHandler = (e) => {
-        // console.log(e.target.value);
-        setInputText(e.target.value); //el valor del input esta en el evento.target
-        //el evento es onChange..
-    };
+    const InputTextHandler = (e) => {    // console.log(e.target.value);
+        setInputText(e.target.value);   //el valor del input esta en el evento.target 
+    };                                  //el evento es onChange..
 
     const submitHandler = (e) => {
-        e.preventDefault();// detiene el comportamiento de recargar pagina al apretar boton submit
-        setTodos([
-            ...todos, { text: inputText, completed: false, id: Math.floor((Math.random() * 1000)) }
-        ])
+        e.preventDefault();   // detiene el comportamiento de recargar pagina al apretar boton submit
+       if(inputText){
+
+           setTodos([
+               ...todos, { 
+                   text: inputText, 
+                   completed: false,
+                   id: Math.floor((Math.random() * 1000)) 
+               }
+           ])
+       }else{
+           alert("escribi algo antes de apretar el mas!")
+       }
         setInputText(""); // al apretar boton submit se vacia el input
         console.log(setInputText);
 
@@ -29,6 +36,7 @@ const Form = ({ setInputText, todos, setTodos, inputText, setStatus }) => {
                     type="text"
                     onChange={InputTextHandler}
                     value={inputText} // si quiero vaciar el input lo necesito
+                    placeholder="---Escribe aqui---"
                 />
                 <button
                     className="todo-button"

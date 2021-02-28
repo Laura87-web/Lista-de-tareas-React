@@ -61,7 +61,7 @@ function App() {
     <div className="App">
       <header>
         <h1>Lista de Tareas</h1>
-        <p>Escribe lo que quieres hacer, tacha o elimina tareas de la lista..</p>
+        <p>¿Que quieres hacer HOY?<br/></p>
       </header>
       <Form 
         setInputText ={setInputText}
